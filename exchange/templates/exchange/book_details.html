@@ -1,0 +1,8 @@
+{% extends 'exchange/base.html' %}
+{% block title %}{{ textbook.title }}{% endblock %}
+
+{% block body %}
+    <h2>{{ textbook.title }}</h2>
+    {{ textbook.author }}
+    {{ textbook.seller.username }}
+{% endblock %}

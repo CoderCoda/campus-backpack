@@ -1,0 +1,14 @@
+{% extends 'exchange/base.html' %}
+{% block body %}
+
+{% if all_courses %}
+<ul>
+    {% for course in all_courses %}
+    <li><a href="{% url 'exchange:course_listings' course.id %}">{{ course.code }} - {{ course.title }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+    <h2><p>No courses available</p></h2>
+{% endif %}
+
+{% endblock %}

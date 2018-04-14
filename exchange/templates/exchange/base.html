@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Campus Bookworm{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'exchange/style.css' %}">
+</head>
+
+
+<body>
+<nav class="navbar navbar-inverse bg-primary">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'exchange:index' %}">CAMPUS BOOKWORM</a>
+        </div>
+
+        <!-- Items -->
+        <ul class="nav navbar-nav">
+            <li class="">
+                <a href="{% url 'exchange:index' %}">
+                    <span class="glyphicon glyphicon-education" aria-hidden="true"></span>&nbsp; Courses
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'exchange:add_listing' %}">
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp; Sell
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+            <li class="">
+                <a href="{% url 'exchange:my_profile' request.user.pk %}">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; My Profile
+                </a>
+            </li>
+        {% else %}
+            <li class="">
+                <a href="{% url 'exchange:register' %}">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Sign up
+                </a>
+            </li>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <li class="">
+                <a href="{% url 'exchange:logout' %}">
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp; Logout
+                </a>
+            </li>
+        {% else %}
+            <li class="">
+                <a href="{% url 'exchange:login' %}">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp; Login
+                </a>
+            </li>
+        {% endif %}
+        </ul>
+    </div>
+</nav>
+
+{% block body %}
+{% endblock %}
+</body>
+</html>

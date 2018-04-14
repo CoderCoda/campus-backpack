@@ -1,0 +1,22 @@
+{% extends 'exchange/base.html' %}
+
+{% block body %}
+
+{{ course }}
+
+{% for textbook in course.textbook_set.all %}
+    <li>
+        <a href="{% url 'exchange:book_details' pk=textbook.pk %}"> {{ textbook.title }} - {{ textbook.author }} - {{ textbook.pk }}</a><br />
+        <a href="{% url 'exchange:edit_listing' book_id=textbook.pk %}">Edit</a><br />
+
+        <form action="{% url 'exchange:delete_listing' textbook.pk %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="book_id" value="{{ textbook.pk }}" style="display: inline"/>
+            <button type="submit" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </form>
+    </li>
+{% endfor %}
+
+{% endblock %}

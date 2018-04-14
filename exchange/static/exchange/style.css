@@ -1,0 +1,11 @@
+body {
+
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-brand {
+    font-family: 'Boogaloo', cursive;
+}
