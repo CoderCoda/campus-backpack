@@ -1,12 +1,12 @@
 from django.db import models
 from django.urls import reverse
-from django.core.validators import MaxValueValidator
+from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 
 
 class Course(models.Model):
-    title = models.CharField(max_length=100)
-    code = models.CharField(max_length=20)
+    title = models.CharField(max_length=100, null=True)
+    code = models.CharField(max_length=20, null=True)
 
     def __str__(self):
         return self.code
@@ -28,12 +28,13 @@ class Textbook(models.Model):
 
     seller = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    price = models.PositiveIntegerField(default=0)
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
-    #ISBN = models.PositiveIntegerField(null=True)
+    ISBN = models.CharField(max_length=13, validators=[RegexValidator(r'\d{13}', 'ISBN must be 13 digits')], null=True)
     condition = models.CharField(max_length=2, choices=CONDITION_CHOICES, default=LIKE_NEW)
     notes = models.CharField(max_length=100, null=True)
-    cover_image_URL = models.CharField(max_length=200, null=True)
+    cover_Image_URL = models.URLField(max_length=400, null=True)
 
     def get_absolute_url(self):
         return reverse('exchange:course_listings', kwargs={'pk': self.course.pk})

@@ -1,23 +1,57 @@
 {% extends 'exchange/base.html' %}
+{% block profile_active %}active{% endblock %}
 
 {% block body %}
 
-    <h2>{{ user.username }}</h2>
-    <h3></h3>
+<div class="container-fluid">
 
-{% for textbook in user.textbook_set.all %}
-    <li>
-        <a href="{% url 'exchange:book_details' pk=textbook.pk %}"> {{ textbook.title }} - {{ textbook.author }}</a><br />
-        <a href="{% url 'exchange:edit_listing' book_id=textbook.pk %}">Edit</a><br />
+    <div class="row display-flex">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body userinfo">
+                    <h2>User Information</h2>
+                    <h4><span class="infofield">Username: </span>{{ user.username }}</h4>
+                    <h4><span class="infofield">Email: </span>{{ user.email }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <h2 class="course-header">My Listings</h2>
+        </div>
+    {% if user.textbook_set.all %}
+        {% for textbook in user.textbook_set.all %}
+            <div class="col-sm-4 col-lg-3">
+                <div class="thumbnail">
+                    <a href="{% url 'exchange:book_details' pk=textbook.pk %}">
+                        <img src="{{ textbook.cover_Image_URL }}" class="img-responsive">
+                    </a>
+                    <div class="caption">
+                        <h4 class="price">${{ textbook.price }}</h4>
+                        <h4>{{ textbook.title|truncatechars:24 }}</h4>
+                        <p>{{ textbook.author|truncatechars:36 }}</p>
 
-        <form action="{% url 'exchange:delete_listing' textbook.pk %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="book_id" value="{{ textbook.pk }}" style="display: inline"/>
-            <button type="submit" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-trash"></span>
-            </button>
-        </form>
-    </li>
-{% endfor %}
+                        <div class="listing-buttons">
+                            <a href="{% url 'exchange:book_details' pk=textbook.pk %}" class="btn btn-primary btn-sm" role="button">Details</a>
+                            <a href="{% url 'exchange:edit_listing' book_id=textbook.pk %}" class="btn btn-default btn-sm" role="button">Edit</a>
+                            <form action="{% url 'exchange:delete_listing' textbook.pk %}" method="post" style="display: inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="book_id" value="{{ textbook.pk }}"/>
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--{% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}-->
+        {% endfor %}
+    {% else %}
+        <div class="col-sm-12">
+            <h3 class="course-header">No listings available</h3>
+        </div>
+    {% endif %}
+    </div>
 
+</div>
 {% endblock %}

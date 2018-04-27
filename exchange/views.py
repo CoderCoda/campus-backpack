@@ -1,6 +1,7 @@
-from django.urls import reverse_lazy
+from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
+from django.core.validators import RegexValidator
 
 from django.views import generic
 from django.views.generic import View
@@ -9,6 +10,10 @@ from django.views.generic.edit import DeleteView
 from django import forms
 from django.contrib.auth.models import User
 from .models import Course, Textbook
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import BookSerializer
 
 
 class IndexView(generic.ListView):
@@ -30,8 +35,9 @@ class DetailView(generic.DetailView):
 
 
 class TextbookForm(forms.ModelForm):
-    #ISBN = forms.CharField(required=False)
+    ISBN = forms.CharField(required=False, label='ISBN', validators=[RegexValidator(r'^\d{13}$', 'ISBN must be 13 digits')])
     notes = forms.CharField(required=False)
+    author = forms.CharField(label='Author(s)')
 
     class Meta:
         model = Textbook
@@ -77,7 +83,7 @@ class TextbookUpdate(View):
             textbook = form.save(commit=False)
             textbook.seller = seller
             textbook.save()
-            return redirect('exchange:course_listings', pk=textbook.course.id)
+            return redirect('exchange:my_profile', pk=seller.id)
             # redirect to MyProfile
 
         return render(request, self.template_name, {'form': form})
@@ -85,12 +91,15 @@ class TextbookUpdate(View):
 
 class TextbookDelete(DeleteView):
     model = Textbook
-    success_url = reverse_lazy('exchange:index')
+
+    def get_success_url(self):
+        return reverse('exchange:my_profile', kwargs={'pk': self.request.user.id})
     # once MyListings is implemented, redirect there instead
 
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.CharField(required=True)
 
     class Meta:
         model = User
@@ -132,3 +141,11 @@ class UserFormView(View):
 class UserView(generic.DetailView):
     model = User
     template_name = 'exchange/my_profile.html'
+
+
+class BookList(APIView):
+
+    def get(self, request):
+        listings = Textbook.objects.all()
+        serializer = BookSerializer(listings, many=True)
+        return Response(serializer.data)

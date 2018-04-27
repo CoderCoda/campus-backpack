@@ -1,11 +1,107 @@
-body {
-
-}
-
-.navbar {
-    border-radius: 0;
-}
-
-.navbar-brand {
+h1 {
+    color: #2baff2;
     font-family: 'Boogaloo', cursive;
+}
+.form-title {
+    margin-bottom: 30px;
+}
+.err {
+    list-style: none;
+}
+.course-header {
+    margin-bottom: 40px;
+}
+.infofield {
+    font-weight: bold;
+}
+.panel-body.userinfo {
+    padding-bottom: 25px;
+}
+.course-code{
+    margin: 0;
+}
+.panel-body.course-info > p {
+    margin: 0;
+}
+.authors {
+    margin-bottom: 30px;
+}
+/*
+.panel > .panel-heading {
+    background-image: none;
+    background-color: dimgrey;
+    color: whitesmoke;
+}
+*/
+
+
+/* textbook thumbnails */
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.thumbnail {
+    height: 100%;
+}
+.thumbnail img {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    min-height: 140px;
+    max-height: 140px;
+}
+.price {
+    width: 100%;
+    background: olivedrab;
+    color: whitesmoke;
+    text-align: center;
+    padding: 5px;
+}
+
+
+/* navbar business */
+.navbar.navbar-inverse {
+    border-color: #700b0b;
+    border-radius: 0;
+    background-color: #8c1515;
+}
+/*
+.navbar.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+*/
+.navbar-brand > img {
+    max-height: 100%;
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+    -o-object-fit: contain;
+    object-fit: contain;
+}
+
+/* navbar links */
+.navbar.navbar-inverse .navbar-nav > li > a {
+    color: whitesmoke;
+}
+.navbar.navbar-inverse .navbar-nav > li > a:hover {
+    color: #d5d0c0;
+}
+
+/* link background and color active state */
+.navbar.navbar-inverse .navbar-nav > .active,
+.navbar.navbar-inverse .navbar-nav > .active > a,
+.navbar.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar.navbar-inverse .navbar-nav > .active > a:focus {
+    background: #700b0b;
+    color: whitesmoke;
+}
+
+/* brand styling */
+.navbar-inverse .navbar-brand {
+    color: whitesmoke;
+    font-family: 'Boogaloo', cursive;
+}
+.navbar-inverse .navbar-brand:hover {
+    color: lightblue;
 }

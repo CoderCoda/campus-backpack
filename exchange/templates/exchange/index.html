@@ -1,14 +1,30 @@
 {% extends 'exchange/base.html' %}
+{% block courses_active %}active{% endblock %}
 {% block body %}
 
-{% if all_courses %}
-<ul>
-    {% for course in all_courses %}
-    <li><a href="{% url 'exchange:course_listings' course.id %}">{{ course.code }} - {{ course.title }}</a></li>
-    {% endfor %}
-</ul>
-{% else %}
-    <h2><p>No courses available</p></h2>
-{% endif %}
+<div class="container-fluid">
+    <h5 align="right"><a href="{% url 'exchange:api' %}">Campus Backpack API: All Textbook Listings</a></h5>
+
+    {% if all_courses %}
+    <div class="panel-group">
+        {% for course in all_courses %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="course-code">
+                        <a href="{% url 'exchange:course_listings' course.id %}">{{ course.code }}</a>
+                    </h4>
+                </div>
+                <div class="panel-body course-info">
+                    <p><span class="infofield">Course Title: </span>{{ course.title }}</p>
+                    <p><span class="infofield"># of Listings: </span>{{ course.textbook_set.count }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+        <h2><p>No courses available</p></h2>
+    {% endif %}
+</div>
 
 {% endblock %}

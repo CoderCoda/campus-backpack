@@ -2,7 +2,39 @@
 {% block title %}{{ textbook.title }}{% endblock %}
 
 {% block body %}
-    <h2>{{ textbook.title }}</h2>
-    {{ textbook.author }}
-    {{ textbook.seller.username }}
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Image -->
+            <div class="col-sm-4 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="{{ textbook.cover_Image_URL }}" class="img-responsive">
+                        <h2 class="price">${{ textbook.price }}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="col-sm-8 col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>{{ textbook.title }}</h3>
+                        <h4 class="authors">{{ textbook.author }}</h4>
+
+                        {% if textbook.ISBN %}
+                            <p><span class="infofield">ISBN: </span>{{ textbook.ISBN }}</p>
+                        {% endif %}
+
+                        <p><span class="infofield">Condition: </span>{{ textbook.get_condition_display }}</p>
+
+                        {% if textbook.notes %}
+                            <p><span class="infofield">Notes: </span>{{ textbook.notes }}</p>
+                        {% endif %}
+
+                        <p><span class="infofield">Contact: </span>{{ textbook.seller.email }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
