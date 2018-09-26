@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'exchange/style.css' %}">
-    <!--<script src="{% static 'exchange/js/main.js' %}"></script>-->
+    <script src="{% static 'exchange/js/main.js' %}"></script>
 </head>
 
 
@@ -26,7 +26,7 @@
         <!-- Header -->
         <div class="navbar-header">
             <a class="navbar-brand" href="{% url 'exchange:index' %}">
-                <img src="{% static 'exchange/images/logo_white.png' %}" alt="CB" />
+                <img src="{% static 'exchange/images/logo_white.png' %}" alt="Campus Backpack" />
             </a>
         </div>
 
@@ -44,6 +44,11 @@
                 </a>
             </li>
             {% endif %}
+            <li class="{% block about_active %}{% endblock %}">
+                <a href="{% url 'exchange:about' %}">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; About
+                </a>
+            </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

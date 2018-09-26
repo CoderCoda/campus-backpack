@@ -1,0 +1,32 @@
+{% extends 'exchange/base.html' %}
+{% block about_active %}active{% endblock %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h1 class="mb-3">Textbooks made easy</h1>
+            <br>
+            <h4>
+                Campus Backpack was developed out of frustration with how students currently must look for their textbooks each semester.
+                If they want to buy them online, they must search for the title, author, edition, and a bunch of other extraneous information to make
+                sure they're getting the right one. Another option is to head to the campus bookstore and buy a used paperback
+                that costs half their tuition. Yeah, right.
+            </h4>
+            <h4>
+                With Campus Backpack, users only need one piece of information to find the right textbook: the course they need it for.
+                Click on one of the courses listed to find textbooks being sold for that course by other students. It's that easy.
+            </h4>
+            <h4>
+                Campus Backpack uses the Duke API to gather a list of courses, thus it is currently designed for only Duke students.
+                However, I am currently working on improving the UI/UX and migrating the site to the MEVN stack (MongoDB, Express.js, Vue.js, Node.js) with hopes
+                of deploying it for production by 2019. In the meantime, enjoy a sneak preview of what could be Craigslist for colleges!
+            </h4>
+            <h4>
+                Git repo <a href="https://github.com/CoderCoda/campus-backpack" target="_blank">here</a>
+            </h4>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

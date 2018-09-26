@@ -3,6 +3,23 @@
 {% block body %}
 
 <div class="container-fluid">
+    <h5><a href="#" data-toggle="modal" data-target="#modal">Why aren't there more classes?</a></h5>
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>This web application uses the Duke University "Curriculum" API. However, the number of courses Duke offers is overwhelming, so the number of classes displayed here is capped in order for a cleaner demo.</p>
+                    <p>The code for gathering the list of courses can be found <a href="https://github.com/CoderCoda/campus-backpack/blob/master/exchange/api.py" target="_blank">here</a> </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Courses</h1>
     <h5 align="right"><a href="{% url 'exchange:api' %}">Campus Backpack API: All Textbook Listings</a></h5>
 
     {% if all_courses %}

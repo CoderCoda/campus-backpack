@@ -4,6 +4,7 @@ from . import views
 app_name = 'exchange'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
+    path('about/', views.about, name='about'),
     path('api/', views.BookList.as_view(), name='api'),
     path('<int:pk>/', views.ListingsView.as_view(), name='course_listings'),
     path('details/<int:pk>/', views.DetailView.as_view(), name='book_details'),

@@ -24,6 +24,10 @@ class IndexView(generic.ListView):
         return Course.objects.all()
 
 
+def about(request):
+    return render(request, 'exchange/about.html')
+
+
 class ListingsView(generic.DetailView):
     model = Course
     template_name = 'exchange/course_listings.html'
